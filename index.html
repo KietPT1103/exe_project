@@ -67,6 +67,14 @@
     <xrextras-named-image-target name="model-target">
       <!-- Add a child entity that can be rotated independently of the image target. -->
       <a-entity xrextras-one-finger-rotate gltf-model="#jelly-glb"></a-entity>
+      <audio id="scan-sound" src="./assets/sound/wave.mp3" preload="auto"></audio>
+      <a-entity
+      text="value: Đây là mô hình 3D của sứa; color: #FFFFFF; width: 2; align: center;"
+      position="0 -1 0" 
+      visible="false"
+      event-set__enter="_event: targetFound; visible: true"
+      event-set__leave="_event: targetLost; visible: false">
+    </a-entity>
     </xrextras-named-image-target>
 
   </a-scene>
