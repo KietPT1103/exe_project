@@ -67,15 +67,21 @@
     <!-- Note: "name:" must be set to the name of the image target uploaded to the 8th Wall Console -->
     <xrextras-named-image-target name="model-target">
       <!-- Add a child entity that can be rotated independently of the image target. -->
-      <a-entity xrextras-one-finger-rotate gltf-model="#jelly-glb"></a-entity>
+      <a-entity
+        xrextras-one-finger-rotate
+        gltf-model="#jelly-glb"
+        sound="src: #scan-sound; autoplay: true; on: targetFound"
+        event-set__enter="_event: targetFound; _target: #scan-sound; _attribute: components.sound.playSound;">
+      </a-entity>
       
       <a-entity
-      text="value: Đây là mô hình 3D của sứa; color: #FFFFFF; width: 2; align: center;"
-      position="0 -1 0" 
-      visible="false"
-      event-set__enter="_event: targetFound; visible: true"
-      event-set__leave="_event: targetLost; visible: false">
-    </a-entity>
+        id="info-text"
+        text="value: Đây là mô hình 3D của sứa; color: #FFFFFF; width: 2; align: center;"
+        position="0 -1 0"
+        visible="false"
+        event-set__enter="_event: targetFound; visible: true"
+        event-set__leave="_event: targetLost; visible: false">
+      </a-entity>
     </xrextras-named-image-target>
 
   </a-scene>
