@@ -43,6 +43,7 @@
         loop="true"
         src="jellyfish-video.mp4">
       </video>
+      <audio id="scan-sound" src="./assets/sound/wave.mp3" preload="auto"></audio>
     </a-assets>
 
     <a-camera
@@ -67,7 +68,7 @@
     <xrextras-named-image-target name="model-target">
       <!-- Add a child entity that can be rotated independently of the image target. -->
       <a-entity xrextras-one-finger-rotate gltf-model="#jelly-glb"></a-entity>
-      <audio id="scan-sound" src="./assets/sound/wave.mp3" preload="auto"></audio>
+      
       <a-entity
       text="value: Đây là mô hình 3D của sứa; color: #FFFFFF; width: 2; align: center;"
       position="0 -1 0" 
