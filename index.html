@@ -1,90 +1,143 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+	<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+	<script>
+		window.onload = function () {
 
-  <title>8th Wall Web: Flyer</title>
+			setTimeout(function () {
+				var resizeEvent = window.document.createEvent('UIEvents');
+				resizeEvent.initUIEvent('resize', true, false, window, 0);
+				window.dispatchEvent(resizeEvent);
 
-  <script src="//cdn.8thwall.com/web/aframe/8frame-1.3.0.min.js"></script>
-
-  <!-- XR Extras - provides utilities like load screen, almost there, and error handling.
-         See github.com/8thwall/web/tree/master/xrextras -->
-  <script src="//cdn.8thwall.com/web/xrextras/xrextras.js"></script>
-
-  <!-- Landing Pages - see https://www.8thwall.com/docs/web/#landing-pages -->
-  <script src='//cdn.8thwall.com/web/landing-page/landing-page.js'></script>
-
-  <!-- 8thWall Web - Replace the app key here with your own app key -->
-  <script async src="//apps.8thwall.com/xrweb?appKey=bfYiR40u8VkfNJ4FnFXDIPq2oIVPI95Wa2HDSCVnf9Gya1OuO0qTnYF4KWU9EKyrlHVdz"></script>
-
+			}, 3000);
+		};	
+	</script>
 </head>
 
-<body>
+<body style='margin : 0px; overflow: hidden;'>
+	<a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
+		<a-assets>
+			<video id="video-01-01" muted autoplay loop="true" src="./media/video/bird.mp4"></video>
+			<video id="video-01-02" muted autoplay loop="true" src="./media/video/cat.mp4"></video>
+			<video id="video-01-03" muted autoplay loop="true" src="./media/video/dog.mp4"></video>
+			<video id="video-01-04" muted autoplay loop="true" src="./media/video/fish.mp4"></video>
+			<video id="video-01-05" muted autoplay loop="true" src="./media/video/hamster.mp4"></video>
+			<audio id="audio-bird" src="./media/audio/bird.mp3"></audio>
+			<audio id="audio-cat" src="./media/audio/cat.mp3"></audio>
+			<audio id="audio-dog" src="./media/audio/dog.mp3"></audio>
+			<audio id="audio-fish" src="./media/audio/fish.mp3"></audio>
+			<audio id="audio-hamster" src="./media/audio/hamster.mp3"></audio>
+		</a-assets>
+		<a-marker preset='custom' type='pattern' url='/marker/pattern-bird2.patt' id="bird-marker">
+			<!-- <a-entity position="0 0 0" rotation="-90 0 0" scale="1 1 1" gltf-model="/media/models/bird_orange.glb"></a-entity> -->
+			<a-video id="bird-video" src="#video-01-01" width="16" height="9" position="0 0 0" rotation="-90 0 0"
+				scale="0.1 0.2 1"></a-video>
+			<a-text value="The bird is singing." position="-2 1 -1" scale="2 2 2" color="#FF5733"
+				rotation="-90 0 0"></a-text>
+		</a-marker>
+		<a-marker preset='custom' type='pattern' url='/marker/pattern-cat2.patt' id="cat-marker">
+			<!-- <a-entity position="0 0 0" rotation="-90 0 0" scale="1 1 1" gltf-model="/media/models/cat.glb"></a-entity> -->
+			<a-video id="cat-video" src="#video-01-02" width="16" height="9" position="0 0 0" rotation="-90 0 0"
+				scale="0.1 0.3 1"></a-video>
+			<a-text value="The cat is saying hello." position="-1 1 -1" scale="1 1 1" color="#FF5733"
+				rotation="-90 0 0"></a-text>
+		</a-marker>
+		<a-marker preset='custom' type='pattern' url='/marker/pattern-dog2.patt' id="dog-marker">
+			<!-- <a-entity position="0 0 0" rotation="-90 0 0" scale="1 1 1" gltf-model="/media/models/dog2.glb"></a-entity> -->
+			<a-video id="dog-video" src="#video-01-03" width="16" height="9" position="0 0 0" rotation="-90 0 0"
+				scale="0.1 0.2 1"></a-video>
+			<a-text value="The dog really loves you." position="-2 1 -1" scale="2 2 2" color="#FF5733"
+				rotation="-90 0 0"></a-text>
+		</a-marker>
+		<a-marker preset='custom' type='pattern' url='/marker/pattern-fish2.patt' id="fish-marker">
+			<!-- <a-entity position="0 0 0" rotation="-90 0 0" scale="1 1 1" gltf-model="/media/models/fish.glb"></a-entity> -->
+			<a-video id="fish-video" src="#video-01-04" width="16" height="9" position="0 0 0" rotation="-90 0 0"
+				scale="0.2 0.2 1"></a-video>
+			<a-text value="The fish is swimming." position="-2 1 -1" scale="2 2 2" color="#FF5733"
+				rotation="-90 0 0"></a-text>
+		</a-marker>
+		<a-marker preset='custom' type='pattern' url='/marker/pattern-mouse2.patt' id="mouse-marker">
+			<!-- <a-entity position="0 0 0" rotation="-90 0 0" scale="1 1 1" gltf-model="/media/models/mouse.glb"></a-entity> -->
+			<a-video id="mouse-video" src="#video-01-05" width="16" height="9" position="0 0 0" rotation="-90 0 0"
+				scale="0.1 0.2 1"></a-video>
+			<a-text value="Look! There is a cute hamster." position="-1 1 -1" scale="1 1 1" color="#FF5733"
+				rotation="-90 0 0"></a-text>
+		</a-marker>
+		<a-entity camera></a-entity>
+	</a-scene>
 
-  <a-scene
-    xrextras-gesture-detector
-    landing-page
-    xrextras-loading
-    xrextras-runtime-error
-    renderer="colorManagement:true"
-    xrweb="disableWorldTracking: true">
+	<script>
+		// Lấy phần tử video
+		const birdVideo = document.getElementById('video-01-01');
+		const catVideo = document.getElementById('video-01-02');
+		const dogVideo = document.getElementById('video-01-03');
+		const fishVideo = document.getElementById('video-01-04');
+		const hamsterVideo = document.getElementById('video-01-05');
 
-    <a-assets>
-      <!-- Credit to Poly by Google for the model: https://poly.google.com/view/dA5osnS0Rzj -->
-      <a-asset-item id="jelly-glb" src="jellyfish-model.glb"></a-asset-item>
-      <img id="jelly-thumb" src="targets/video-target.jpg">
-      <video
-        id="jelly-video"
-        autoplay
-        muted
-        crossorigin="anonymous"
-        loop="true"
-        src="jellyfish-video.mp4">
-      </video>
-      <audio id="scan-sound" src="./assets/sound/wave.mp3" preload="auto"></audio>
-    </a-assets>
+		// Lấy phần tử âm thanh
+		const birdAudio = document.getElementById('audio-bird');
+		const catAudio = document.getElementById('audio-cat');
+		const dogAudio = document.getElementById('audio-dog');
+		const fishAudio = document.getElementById('audio-fish');
+		const hamsterAudio = document.getElementById('audio-hamster');
 
-    <a-camera
-      position="0 4 10"
-      raycaster="objects: .cantap"
-      cursor="fuse: false; rayOrigin: mouse;">
-    </a-camera>
+		// Lấy phần tử marker
+		const birdMarker = document.querySelector('#bird-marker');
+		const catMarker = document.querySelector('#cat-marker');
+		const dogMarker = document.querySelector('#dog-marker');
+		const fishMarker = document.querySelector('#fish-marker');
+		const hamsterMarker = document.querySelector('#mouse-marker');
 
-    <a-light type="directional" intensity="0.5" position="1 1 1"></a-light>
+		// Hàm phát âm thanh
+		function playAudio(audio) {
+			audio.currentTime = 0;  // Phát từ đầu
+			audio.play();
+		}
 
-    <a-light type="ambient" intensity="1"></a-light>
+		// Hàm dừng âm thanh
+		function stopAudio(audio) {
+			audio.pause();
+			audio.currentTime = 0;  // Reset thời gian về đầu
+		}
 
-    <!-- Note: "name:" must be set to the name of the image target uploaded to the 8th Wall Console -->
-    <xrextras-named-image-target name="video-target">
-      <a-entity
-        xrextras-play-video="video: #jelly-video; thumb: #jelly-thumb; canstop: true"
-        geometry="primitive: plane; height: 1; width: 0.79;"
-      ></a-entity>
-    </xrextras-named-image-target>
+		// Hàm phát video không có âm thanh
+		function playMutedVideo(video) {
+			video.muted = true;
+			video.play();
+		}
+		// Khi marker được quét
+		birdMarker.addEventListener('markerFound', () => {
+			playMutedVideo(birdVideo);
+			playAudio(birdAudio);
+		});
+		birdMarker.addEventListener('markerLost', () => stopAudio(birdAudio));
 
-    <!-- Note: "name:" must be set to the name of the image target uploaded to the 8th Wall Console -->
-    <xrextras-named-image-target name="model-target">
-      <!-- Add a child entity that can be rotated independently of the image target. -->
-      <a-entity
-        xrextras-one-finger-rotate
-        gltf-model="#jelly-glb"
-        sound="src: #scan-sound; autoplay: true; on: targetFound"
-        event-set__enter="_event: targetFound; _target: #scan-sound; _attribute: components.sound.playSound;">
-      </a-entity>
-      
-      <a-entity
-        id="info-text"
-        text="value: Đây là mô hình 3D của sứa; color: #FFFFFF; width: 2; align: center;"
-        position="0 -1 0"
-        visible="false"
-        event-set__enter="_event: targetFound; visible: true"
-        event-set__leave="_event: targetLost; visible: false">
-      </a-entity>
-    </xrextras-named-image-target>
+		catMarker.addEventListener('markerFound', () => {
+			playMutedVideo(catVideo);
+			playAudio(catAudio);
+		});
+		catMarker.addEventListener('markerLost', () => stopAudio(catAudio));
 
-  </a-scene>
+		dogMarker.addEventListener('markerFound', () => {
+			playMutedVideo(dogVideo);
+			playAudio(dogAudio);
+		});
+		dogMarker.addEventListener('markerLost', () => stopAudio(dogAudio));
 
+		fishMarker.addEventListener('markerFound', () => {
+			playMutedVideo(fishVideo);
+			playAudio(fishAudio);
+		});
+		fishMarker.addEventListener('markerLost', () => stopAudio(fishAudio));
+
+		hamsterMarker.addEventListener('markerFound', () => {
+			playMutedVideo(hamsterVideo);
+			playAudio(hamsterAudio);
+		});
+		hamsterMarker.addEventListener('markerLost', () => stopAudio(hamsterAudio));
+	</script>
 </body>
-</html>
