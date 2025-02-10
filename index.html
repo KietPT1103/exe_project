@@ -48,8 +48,8 @@
 		</a-marker>
 		<a-marker preset='custom' type='pattern' url='/marker/pattern-dog2.patt' id="dog-marker">
 			<!-- <a-entity position="0 0 0" rotation="-90 0 0" scale="1 1 1" gltf-model="/media/models/dog2.glb"></a-entity> -->
-			<a-video id="dog-video" src="#video-01-03" width="16" height="9" position="0 0 0" rotation="-90 0 0"
-				scale="0.1 0.2 1"></a-video>
+			<a-video id="dog-video" src="#video-01-03" width="16" height="9" position="0 0 0" rotation="0 0 0"
+				scale="1 1 1"></a-video>
 			<a-text value="The dog really loves you." position="-2 1 -1" scale="2 2 2" color="#FF5733"
 				rotation="-90 0 0"></a-text>
 		</a-marker>
@@ -90,8 +90,7 @@
 		const catMarker = document.querySelector('#cat-marker');
 		const dogMarker = document.querySelector('#dog-marker');
 		const fishMarker = document.querySelector('#fish-marker');
-		const hamsterMarker = document.querySelector('#mouse-marker');
-
+		const hamsterMarker = document.querySelector('#mouse-marker')
 
 		// Hàm phát âm thanh
 		function playAudio(audio) {
