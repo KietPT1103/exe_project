@@ -26,7 +26,7 @@
 			<video id="video-01-03" muted autoplay loop="true" src="./media/video/dog.mp4"></video>
 			<video id="video-01-04" muted autoplay loop="true" src="./media/video/fish.mp4"></video>
 			<video id="video-01-05" muted autoplay loop="true" src="./media/video/hamster.mp4"></video>
-			
+
 		</a-assets>
 		<a-marker preset='custom' type='pattern' url='/marker/pattern-bird2.patt' id="bird-marker">
 			<!-- <a-entity position="0 0 0" rotation="-90 0 0" scale="1 1 1" gltf-model="/media/models/bird_orange.glb"></a-entity> -->
@@ -74,13 +74,6 @@
 		const fishVideo = document.getElementById('video-01-04');
 		const hamsterVideo = document.getElementById('video-01-05');
 
-		// Lấy phần tử âm thanh
-		const birdAudio = document.getElementById('audio-bird');
-		const catAudio = document.getElementById('audio-cat');
-		const dogAudio = document.getElementById('audio-dog');
-		const fishAudio = document.getElementById('audio-fish');
-		const hamsterAudio = document.getElementById('audio-hamster');
-
 		// Lấy phần tử marker
 		const birdMarker = document.querySelector('#bird-marker');
 		const catMarker = document.querySelector('#cat-marker');
@@ -88,14 +81,15 @@
 		const fishMarker = document.querySelector('#fish-marker');
 		const hamsterMarker = document.querySelector('#mouse-marker');
 
-		
 
-		// Hàm phát âm thanh
-		function playAudio(audio) {
+		function playAudio(src) {
+			let audio = new Audio(src);
 			audio.currentTime = 0;  // Phát từ đầu
 			audio.play();
+			return audio;
 		}
 
+		let birdAudio, catAudio, dogAudio, fishAudio, hamsterAudio;
 		// Hàm dừng âm thanh
 		function stopAudio(audio) {
 			audio.pause();
@@ -107,35 +101,44 @@
 			video.muted = true;
 			video.play();
 		}
-		// Khi marker được quét
 		birdMarker.addEventListener('markerFound', () => {
 			playMutedVideo(birdVideo);
-			playAudio(birdAudio);
+			birdAudio = playAudio("./media/audio/bird.mp3");
 		});
-		birdMarker.addEventListener('markerLost', () => stopAudio(birdAudio));
+		birdMarker.addEventListener('markerLost', () => {
+			if (birdAudio) birdAudio.pause();
+		});
 
 		catMarker.addEventListener('markerFound', () => {
 			playMutedVideo(catVideo);
-			playAudio(catAudio);
+			catAudio = playAudio("./media/audio/cat.mp3");
 		});
-		catMarker.addEventListener('markerLost', () => stopAudio(catAudio));
+		catMarker.addEventListener('markerLost', () => {
+			if (catAudio) catAudio.pause();
+		});
 
 		dogMarker.addEventListener('markerFound', () => {
 			playMutedVideo(dogVideo);
-			playAudio(dogAudio);
+			dogAudio = playAudio("./media/audio/dog.mp3");
 		});
-		dogMarker.addEventListener('markerLost', () => stopAudio(dogAudio));
+		dogMarker.addEventListener('markerLost', () => {
+			if (dogAudio) dogAudio.pause();
+		});
 
 		fishMarker.addEventListener('markerFound', () => {
 			playMutedVideo(fishVideo);
-			playAudio(fishAudio);
+			fishAudio = playAudio("./media/audio/fish.mp3");
 		});
-		fishMarker.addEventListener('markerLost', () => stopAudio(fishAudio));
+		fishMarker.addEventListener('markerLost', () => {
+			if (fishAudio) fishAudio.pause();
+		});
 
 		hamsterMarker.addEventListener('markerFound', () => {
 			playMutedVideo(hamsterVideo);
-			playAudio(hamsterAudio);
+			hamsterAudio = playAudio("./media/audio/hamster.mp3");
 		});
-		hamsterMarker.addEventListener('markerLost', () => stopAudio(hamsterAudio));
+		hamsterMarker.addEventListener('markerLost', () => {
+			if (hamsterAudio) hamsterAudio.pause();
+		});
 	</script>
 </body>
