@@ -21,19 +21,19 @@
 <body style='margin : 0px; overflow: hidden;'>
 	<a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
 		<a-assets>
-			<video id="video-01-01" muted autoplay loop="true" webkit-playsinline playsinline>
+			<video id="video-01-01" muted autoplay loop="true" visible="false" webkit-playsinline playsinline>
 				<source src="./media/video/bird.mp4" type="video/mp4">
 			</video>
-			<video id="video-01-02" muted autoplay loop="true" webkit-playsinline playsinline>
+			<video id="video-01-02" muted autoplay loop="true" visible="false" webkit-playsinline playsinline>
 				<source src="./media/video/cat.mp4" type="video/mp4">
 			</video>
-			<video id="video-01-03" muted autoplay loop="true" webkit-playsinline playsinline>
+			<video id="video-01-03" muted autoplay loop="true" visible="false" webkit-playsinline playsinline>
 				<source src="./media/video/dog.mp4" type="video/mp4">
 			</video>
-			<video id="video-01-04" muted autoplay loop="true" webkit-playsinline playsinline>
+			<video id="video-01-04" muted autoplay loop="true" visible="false" webkit-playsinline playsinline>
 				<source src="./media/video/fish.mp4" type="video/mp4">
 			</video>
-			<video id="video-01-05" muted autoplay loop="true" webkit-playsinline playsinline>
+			<video id="video-01-05" muted autoplay loop="true" visible="false" webkit-playsinline playsinline>
 				<source src="./media/video/hamster.mp4" type="video/mp4">
 			</video>
 			<audio id="audio-bird" src="./media/audio/bird.mp3"></audio>
@@ -102,7 +102,7 @@
 		const fishMarker = document.querySelector('#fish-marker');
 		const hamsterMarker = document.querySelector('#mouse-marker');
 
-		
+
 
 		// Hàm phát âm thanh
 		function playAudio(audio) {
@@ -123,33 +123,55 @@
 		}
 		// Khi marker được quét
 		birdMarker.addEventListener('markerFound', () => {
+			document.getElementById('video-01-01').setAttribute('visible', 'true');
 			playMutedVideo(birdVideo);
 			playAudio(birdAudio);
 		});
-		birdMarker.addEventListener('markerLost', () => stopAudio(birdAudio));
+		birdMarker.addEventListener('markerLost', () => {
+			stopAudio(birdAudio)
+			document.getElementById('video-01-01').setAttribute('visible', 'false');
+		});
 
 		catMarker.addEventListener('markerFound', () => {
+			document.getElementById('video-01-02').setAttribute('visible', 'true');
 			playMutedVideo(catVideo);
 			playAudio(catAudio);
 		});
-		catMarker.addEventListener('markerLost', () => stopAudio(catAudio));
+		catMarker.addEventListener('markerLost', () => {
+			stopAudio(catAudio);
+			document.getElementById('video-01-02').setAttribute('visible', 'false');
+
+		});
 
 		dogMarker.addEventListener('markerFound', () => {
+			document.getElementById('video-01-03').setAttribute('visible', 'true');
 			playMutedVideo(dogVideo);
 			playAudio(dogAudio);
 		});
-		dogMarker.addEventListener('markerLost', () => stopAudio(dogAudio));
+		dogMarker.addEventListener('markerLost', () => {
+			stopAudio(dogAudio);
+			document.getElementById('video-01-03').setAttribute('visible', 'false');
+
+		});
 
 		fishMarker.addEventListener('markerFound', () => {
+			document.getElementById('video-01-04').setAttribute('visible', 'true');
 			playMutedVideo(fishVideo);
 			playAudio(fishAudio);
 		});
-		fishMarker.addEventListener('markerLost', () => stopAudio(fishAudio));
+		fishMarker.addEventListener('markerLost', () => {
+			document.getElementById('video-01-04').setAttribute('visible', 'false');
+			stopAudio(fishAudio);
+		});
 
 		hamsterMarker.addEventListener('markerFound', () => {
+			document.getElementById('video-01-05').setAttribute('visible', 'true');
 			playMutedVideo(hamsterVideo);
 			playAudio(hamsterAudio);
 		});
-		hamsterMarker.addEventListener('markerLost', () => stopAudio(hamsterAudio));
+		hamsterMarker.addEventListener('markerLost', () => {
+			document.getElementById('video-01-05').setAttribute('visible', 'false');
+			stopAudio(hamsterAudio)
+		});
 	</script>
 </body>
