@@ -21,16 +21,16 @@
 <body style='margin : 0px; overflow: hidden;'>
 	<a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
 		<a-assets>
-			<video id="video-01-01" muted autoplay loop="true" src="./media/video/bird.mp4"></video>
-			<video id="video-01-02" muted autoplay loop="true" src="./media/video/cat.mp4"></video>
-			<video id="video-01-03" muted autoplay loop="true" src="./media/video/dog.mp4"></video>
-			<video id="video-01-04" muted autoplay loop="true" src="./media/video/fish.mp4"></video>
-			<video id="video-01-05" muted autoplay loop="true" src="./media/video/hamster.mp4"></video>
-			<audio id="audio-bird" src="./media/audio/bird.mp3"></audio>
-			<audio id="audio-cat" src="./media/audio/cat.mp3"></audio>
-			<audio id="audio-dog" src="./media/audio/dog.mp3"></audio>
-			<audio id="audio-fish" src="./media/audio/fish.mp3"></audio>
-			<audio id="audio-hamster" src="./media/audio/hamster.mp3"></audio>
+			<video id="video-01-01" muted autoplay loop="true" crossorigin="anonymous" src="./media/video/bird.mp4"></video>
+			<video id="video-01-02" muted autoplay loop="true" crossorigin="anonymous" src="./media/video/cat.mp4"></video>
+			<video id="video-01-03" muted autoplay loop="true" crossorigin="anonymous" src="./media/video/dog.mp4"></video>
+			<video id="video-01-04" muted autoplay loop="true" crossorigin="anonymous" src="./media/video/fish.mp4"></video>
+			<video id="video-01-05" muted autoplay loop="true" crossorigin="anonymous" src="./media/video/hamster.mp4"></video>
+			<audio crossorigin="anonymous" id="audio-bird" src="./media/audio/bird.mp3"></audio>
+			<audio crossorigin="anonymous" id="audio-cat" src="./media/audio/cat.mp3"></audio>
+			<audio crossorigin="anonymous" id="audio-dog" src="./media/audio/dog.mp3"></audio>
+			<audio crossorigin="anonymous" id="audio-fish" src="./media/audio/fish.mp3"></audio>
+			<audio crossorigin="anonymous" id="audio-hamster" src="./media/audio/hamster.mp3"></audio>
 		</a-assets>
 		<a-marker preset='custom' type='pattern' url='/marker/pattern-bird2.patt' id="bird-marker">
 			<!-- <a-entity position="0 0 0" rotation="-90 0 0" scale="1 1 1" gltf-model="/media/models/bird_orange.glb"></a-entity> -->
