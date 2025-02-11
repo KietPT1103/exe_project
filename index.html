@@ -20,7 +20,7 @@
 
 <body style='margin : 0px; overflow: hidden;'>
 	<a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
-		<a-assets timeout="30000">
+		<a-assets timeout="5000">
 			<video id="video-01-01" muted autoplay loop="true" crossorigin="anonymous" src="./media/video/bird.mp4"></video>
 			<video id="video-01-02" muted autoplay loop="true" crossorigin="anonymous" src="./media/video/cat.mp4"></video>
 			<video id="video-01-03" muted autoplay loop="true" crossorigin="anonymous" src="./media/video/dog.mp4"></video>
@@ -36,110 +36,80 @@
 			<!-- <a-entity position="0 0 0" rotation="-90 0 0" scale="1 1 1" gltf-model="/media/models/bird_orange.glb"></a-entity> -->
 			<a-video id="bird-video" src="#video-01-01" width="16" height="9" position="0 0 0" rotation="-90 0 0"
 				scale="0.1 0.2 1"></a-video>
-			<a-text value="The BIRD is singing." position="-0.5 1 -1" scale="0.5 0.5 0.5" color="#FF5733"
+			<a-text value="The bird is singing." position="-2 1 -1" scale="2 2 2" color="#FF5733"
 				rotation="-90 0 0"></a-text>
 		</a-marker>
 		<a-marker preset='custom' type='pattern' url='/marker/pattern-cat2.patt' id="cat-marker">
 			<!-- <a-entity position="0 0 0" rotation="-90 0 0" scale="1 1 1" gltf-model="/media/models/cat.glb"></a-entity> -->
 			<a-video id="cat-video" src="#video-01-02" width="16" height="9" position="0 0 0" rotation="-90 0 0"
 				scale="0.1 0.3 1"></a-video>
-			<a-text value="The CAT is saying hello." position="-0.5 1 -1" scale="0.5 0.5 0.5" color="#FF5733"
+			<a-text value="The cat is saying hello." position="-1 1 -1" scale="1 1 1" color="#FF5733"
 				rotation="-90 0 0"></a-text>
 		</a-marker>
 		<a-marker preset='custom' type='pattern' url='/marker/pattern-dog2.patt' id="dog-marker">
 			<!-- <a-entity position="0 0 0" rotation="-90 0 0" scale="1 1 1" gltf-model="/media/models/dog2.glb"></a-entity> -->
 			<a-video id="dog-video" src="#video-01-03" width="16" height="9" position="0 0 0" rotation="-90 0 0"
 				scale="0.1 0.2 1"></a-video>
-			<a-text value="The DOG really loves you." position="-0.5 1 -1" scale="0.5 0.5 0.5" color="#FF5733"
+			<a-text value="The dog really loves you." position="-2 1 -1" scale="2 2 2" color="#FF5733"
 				rotation="-90 0 0"></a-text>
 		</a-marker>
 		<a-marker preset='custom' type='pattern' url='/marker/pattern-fish2.patt' id="fish-marker">
 			<!-- <a-entity position="0 0 0" rotation="-90 0 0" scale="1 1 1" gltf-model="/media/models/fish.glb"></a-entity> -->
 			<a-video id="fish-video" src="#video-01-04" width="16" height="9" position="0 0 0" rotation="-90 0 0"
 				scale="0.2 0.2 1"></a-video>
-			<a-text value="The FISH is swimming." position="-0.5 0.8 -1" scale="0.5 0.5 0.5" color="#FF5733"
+			<a-text value="The fish is swimming." position="-2 1 -1" scale="2 2 2" color="#FF5733"
 				rotation="-90 0 0"></a-text>
 		</a-marker>
 		<a-marker preset='custom' type='pattern' url='/marker/pattern-mouse2.patt' id="mouse-marker">
 			<!-- <a-entity position="0 0 0" rotation="-90 0 0" scale="1 1 1" gltf-model="/media/models/mouse.glb"></a-entity> -->
 			<a-video id="mouse-video" src="#video-01-05" width="16" height="9" position="0 0 0" rotation="-90 0 0"
 				scale="0.1 0.2 1"></a-video>
-			<a-text value="Look! There is a cute HAMSTER." position="-0.7 1 -1" scale="0.5 0.5 0.5" color="#FF5733"
+			<a-text value="Look! There is a cute hamster." position="-1 1 -1" scale="1 1 1" color="#FF5733"
 				rotation="-90 0 0"></a-text>
 		</a-marker>
 		<a-entity camera></a-entity>
 	</a-scene>
 
 	<script>
-		// Lấy phần tử video
+		// Lắng nghe sự kiện khi marker được quét
+		const birdMarker = document.querySelector('#bird-marker');
+		const catMarker = document.querySelector('#cat-marker');
+		const mouseMarker = document.querySelector('#mouse-marker');
+		const fishMarker = document.querySelector('#fish-marker');
+		const dogMarker = document.querySelector('#dog-marker');
+
 		const birdVideo = document.getElementById('video-01-01');
 		const catVideo = document.getElementById('video-01-02');
 		const dogVideo = document.getElementById('video-01-03');
 		const fishVideo = document.getElementById('video-01-04');
-		const hamsterVideo = document.getElementById('video-01-05');
+		const mouseVideo = document.getElementById('video-01-05');
 
-		// Lấy phần tử âm thanh
-		const birdAudio = document.getElementById('audio-bird');
-		const catAudio = document.getElementById('audio-cat');
-		const dogAudio = document.getElementById('audio-dog');
-		const fishAudio = document.getElementById('audio-fish');
-		const hamsterAudio = document.getElementById('audio-hamster');
-
-		// Lấy phần tử marker
-		const birdMarker = document.querySelector('#bird-marker');
-		const catMarker = document.querySelector('#cat-marker');
-		const dogMarker = document.querySelector('#dog-marker');
-		const fishMarker = document.querySelector('#fish-marker');
-		const hamsterMarker = document.querySelector('#mouse-marker');
-
-		
-
-		// Hàm phát âm thanh
-		function playAudio(audio) {
-			audio.currentTime = 0;  // Phát từ đầu
-			audio.play();
+		// Hàm bật âm thanh cho video
+		function unmuteVideo(video) {
+			video.muted = false;
+			video.play();  // Chơi lại video khi phát hiện marker
 		}
 
-		// Hàm dừng âm thanh
-		function stopAudio(audio) {
-			audio.pause();
-			audio.currentTime = 0;  // Reset thời gian về đầu
-		}
-
-		// Hàm phát video không có âm thanh
-		function playMutedVideo(video) {
+		// Hàm tắt âm thanh cho video
+		function muteVideo(video) {
 			video.muted = true;
-			video.play();
+			// video.pause();
 		}
-		// Khi marker được quét
-		birdMarker.addEventListener('markerFound', () => {
-			playMutedVideo(birdVideo);
-			playAudio(birdAudio);
-		});
-		birdMarker.addEventListener('markerLost', () => stopAudio(birdAudio));
 
-		catMarker.addEventListener('markerFound', () => {
-			playMutedVideo(catVideo);
-			playAudio(catAudio);
-		});
-		catMarker.addEventListener('markerLost', () => stopAudio(catAudio));
+		// Gán sự kiện `markerFound` và `markerLost` cho các marker
+		birdMarker.addEventListener('markerFound', () => unmuteVideo(birdVideo));
+		birdMarker.addEventListener('markerLost', () => muteVideo(birdVideo));
 
-		dogMarker.addEventListener('markerFound', () => {
-			playMutedVideo(dogVideo);
-			playAudio(dogAudio);
-		});
-		dogMarker.addEventListener('markerLost', () => stopAudio(dogAudio));
+		catMarker.addEventListener('markerFound', () => unmuteVideo(catVideo));
+		catMarker.addEventListener('markerLost', () => muteVideo(catVideo));
 
-		fishMarker.addEventListener('markerFound', () => {
-			playMutedVideo(fishVideo);
-			playAudio(fishAudio);
-		});
-		fishMarker.addEventListener('markerLost', () => stopAudio(fishAudio));
+		mouseMarker.addEventListener('markerFound', () => unmuteVideo(mouseVideo));
+		mouseMarker.addEventListener('markerLost', () => muteVideo(mouseVideo));
 
-		hamsterMarker.addEventListener('markerFound', () => {
-			playMutedVideo(hamsterVideo);
-			playAudio(hamsterAudio);
-		});
-		hamsterMarker.addEventListener('markerLost', () => stopAudio(hamsterAudio));
+		fishMarker.addEventListener('markerFound', () => unmuteVideo(fishVideo));
+		fishMarker.addEventListener('markerLost', () => muteVideo(fishVideo));
+
+		dogMarker.addEventListener('markerFound', () => unmuteVideo(dogVideo));
+		dogMarker.addEventListener('markerLost', () => muteVideo(dogVideo));
 	</script>
 </body>
